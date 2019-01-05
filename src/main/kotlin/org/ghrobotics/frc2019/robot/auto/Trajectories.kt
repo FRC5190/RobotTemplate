@@ -3,9 +3,8 @@
  * Green Hope Falcons
  */
 
-package org.ghrobotics.robot.auto
+package org.ghrobotics.frc2019.robot.auto
 
-/* ktlint-disable no-wildcard-imports */
 import org.ghrobotics.lib.mathematics.twodim.geometry.Pose2d
 import org.ghrobotics.lib.mathematics.twodim.geometry.Pose2dWithCurvature
 import org.ghrobotics.lib.mathematics.twodim.trajectory.DefaultTrajectoryGenerator
@@ -16,11 +15,8 @@ import org.ghrobotics.lib.mathematics.twodim.trajectory.types.TimedTrajectory
 import org.ghrobotics.lib.mathematics.units.derivedunits.*
 import org.ghrobotics.lib.mathematics.units.feet
 import org.ghrobotics.lib.mathematics.units.meter
-import org.ghrobotics.robot.subsytems.drive.DriveSubsystem
+import org.ghrobotics.frc2019.robot.subsytems.drive.DriveSubsystem
 
-/**
- * Contains trajectories for autonomous
- */
 object Trajectories {
 
     // Constants in Feet Per Second
@@ -31,16 +27,16 @@ object Trajectories {
     // Constraints
     private val kConstraints = listOf(
         CentripetalAccelerationConstraint(kMaxCentripetalAcceleration),
-        DifferentialDriveDynamicsConstraint(DriveSubsystem.driveModel, 10.0.volt)
+        DifferentialDriveDynamicsConstraint(DriveSubsystem.differentialDrive, 10.0.volt)
     )
 
-    private fun waypoints(vararg waypoints: Pose2d) = listOf(*waypoints)
+    private fun waypoints(vararg waypoints: Pose2d) = waypoints.toList()
 
     private fun List<Pose2d>.generateTrajectory(
         name: String,
         reversed: Boolean,
-        maxVelocity: Velocity = kMaxVelocity,
-        maxAcceleration: Acceleration = kMaxAcceleration,
+        maxVelocity: LinearVelocity = kMaxVelocity,
+        maxAcceleration: LinearAcceleration = kMaxAcceleration,
         constraints: List<TimingConstraint<Pose2dWithCurvature>> = kConstraints
     ): TimedTrajectory<Pose2dWithCurvature> {
         println("Generating $name...")

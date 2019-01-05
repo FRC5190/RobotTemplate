@@ -15,5 +15,7 @@ build/
 *.class
 *.ipr
 
+detekt.html
+
 .vscode/
 *.code-workspace

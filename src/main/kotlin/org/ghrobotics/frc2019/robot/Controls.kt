@@ -3,14 +3,10 @@
  * Green Hope Falcons
  */
 
-package org.ghrobotics.robot
+package org.ghrobotics.frc2019.robot
 
 import org.ghrobotics.lib.wrappers.hid.xboxController
 
-/**
- * Contains all controls for the robot.
- */
 object Controls {
-    // Main Xbox controller
     val mainXbox = xboxController(0) { }
 }

@@ -3,6 +3,5 @@
  * Green Hope Falcons
  */
 
-
-rootProject.name = '2019CompetitionSeason'
+rootProject.name = "RobotTemplate"
 
