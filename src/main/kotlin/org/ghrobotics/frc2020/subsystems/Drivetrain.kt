@@ -56,7 +56,7 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         leftMotor.outputInverted = false
         leftSlave1.outputInverted = false
         rightMotor.outputInverted = true
-        rightMotor.outputInverted = true
+        rightSlave1.outputInverted = true
 
         // Set the default command
         defaultCommand = TeleopDriveCommand()
