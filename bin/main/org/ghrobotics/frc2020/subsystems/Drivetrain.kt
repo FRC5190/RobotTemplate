@@ -8,8 +8,6 @@
 
 package org.ghrobotics.frc2020.subsystems
 
-import com.kauailabs.navx.frc.AHRS
-import edu.wpi.first.wpilibj.SPI
 import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
@@ -22,7 +20,6 @@ import org.ghrobotics.lib.mathematics.units.nativeunit.DefaultNativeUnitModel
 import org.ghrobotics.lib.motors.ctre.FalconSRX
 import org.ghrobotics.lib.physics.MotorCharacterization
 import org.ghrobotics.lib.subsystems.drive.FalconWestCoastDrivetrain
-import org.ghrobotics.lib.utils.asSource
 
 /**
  * Represents the drivetrain of the robot.
@@ -38,8 +35,7 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     override val odometry = DifferentialDriveOdometry(kinematics)
 
     // Gyro
-    val navx = AHRS(SPI.Port.kMXP)
-    override val gyro = navx.asSource()
+    override val gyro = { Rotation2d() }
 
     // Motor characterization
     override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))

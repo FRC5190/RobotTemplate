@@ -9,7 +9,6 @@
 package org.ghrobotics.frc2020
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
-import org.ghrobotics.frc2020.commands.TeeterTotterCommand
 import org.ghrobotics.frc2020.subsystems.Drivetrain
 import org.ghrobotics.lib.wrappers.FalconTimedRobot
 
@@ -18,8 +17,6 @@ import org.ghrobotics.lib.wrappers.FalconTimedRobot
  */
 object Robot : FalconTimedRobot() {
 
-    var i = 0
-
     // Constructor of the Robot class.
     init {
         // Add the drivetrain to the subsystem handler
@@ -27,17 +24,13 @@ object Robot : FalconTimedRobot() {
     }
 
     // Runs once when robot boots up
-    override fun robotInit() {
-    }
+    override fun robotInit() {}
 
     // Runs once when autonomous period starts
-    override fun autonomousInit() {
-        TeeterTotterCommand().schedule()
-    }
+    override fun autonomousInit() {}
 
     // Runs once when teleop period starts
-    override fun teleopInit() {
-    }
+    override fun teleopInit() {}
 
     // Runs once when robot is disabled
     override fun disabledInit() {}
@@ -48,8 +41,7 @@ object Robot : FalconTimedRobot() {
     }
 
     // Runs every 20 ms when autonomous is enabled
-    override fun autonomousPeriodic() {
-    }
+    override fun autonomousPeriodic() {}
 
     // Runs every 20 ms when teleop is enabled
     override fun teleopPeriodic() {}
