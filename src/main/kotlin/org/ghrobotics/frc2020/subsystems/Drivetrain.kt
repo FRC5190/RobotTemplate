@@ -9,16 +9,14 @@
 package org.ghrobotics.frc2020.subsystems
 
 import edu.wpi.first.wpilibj.controller.RamseteController
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
 import org.ghrobotics.frc2020.Constants
 import org.ghrobotics.frc2020.commands.TeleopDriveCommand
-import org.ghrobotics.lib.mathematics.units.Meter
-import org.ghrobotics.lib.mathematics.units.SIUnit
 import org.ghrobotics.lib.mathematics.units.nativeunit.DefaultNativeUnitModel
 import org.ghrobotics.lib.motors.ctre.FalconSRX
-import org.ghrobotics.lib.physics.MotorCharacterization
 import org.ghrobotics.lib.subsystems.drive.FalconWestCoastDrivetrain
 
 /**
@@ -29,20 +27,21 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     override val leftMotor = FalconSRX(Constants.Drivetrain.kLeftMasterId, Constants.Drivetrain.kNativeUnitModel)
     override val rightMotor = FalconSRX(Constants.Drivetrain.kRightMasterId, Constants.Drivetrain.kNativeUnitModel)
 
-    // Path following
-    override val controller = RamseteController(2.0, 0.7)
-    override val kinematics = DifferentialDriveKinematics(Constants.Drivetrain.kTrackWidth.value)
-    override val odometry = DifferentialDriveOdometry(kinematics)
-
     // Gyro
     override val gyro = { Rotation2d() }
 
+    // Path following
+    override val controller = RamseteController(2.0, 0.7)
+    override val kinematics = DifferentialDriveKinematics(Constants.Drivetrain.kTrackWidth.value)
+    override val odometry = DifferentialDriveOdometry(kinematics, gyro())
+
     // Motor characterization
-    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))
-    override val rightCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))
+    override val leftCharacterization = SimpleMotorFeedforward(0.0, 0.0, 0.0)
+    override val rightCharacterization = SimpleMotorFeedforward(0.0, 0.0, 0.0)
 
     // Emergency mode
     override fun activateEmergency() {}
+
     override fun recoverFromEmergency() {}
 
     // Initialize follower motors and other motor configs
